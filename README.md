@@ -1,5 +1,5 @@
 # PCA-toolkit
-A toolkit for pre-process image-samples into LibSVM training &amp; testing data format
+A toolkit for pre-processing image-samples into LibSVM training &amp; testing data format
 
 ## Introduction
 This toolkit requires opencv3.x and libtclap-dev (for parsing command-line arguments). All the images to be pre-processed are tiny pictures about 32x32 or 24x24 (or other sizes), and placed in the './data/' directory. The './data' directory hierachy is as follows:
