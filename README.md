@@ -2,9 +2,9 @@
 A toolkit for pre-process image-samples into LibSVM training &amp; testing data format
 
 ## Introduction
-This toolkit requires opencv3.x and libtclap-dev(for parsing command-line arguments). All the images to be pre-processed are tiny pictures about 32x32 or 24x24 (or other sizes), and placed in the './data/' directory. The './data' directory hierachy is as follows:
+This toolkit requires opencv3.x and libtclap-dev (for parsing command-line arguments). All the images to be pre-processed are tiny pictures about 32x32 or 24x24 (or other sizes), and placed in the './data/' directory. The './data' directory hierachy is as follows:
 
-    data_empy/
+    data/
     ├── test
     │   ├── 1 -> digits/0
     │   ├── 10 -> digits/9
@@ -86,7 +86,7 @@ This toolkit requires opencv3.x and libtclap-dev(for parsing command-line argume
             ├── rbracket
             └── sub
 
-Notice that only './data/train/[label-numbers]' & './data/test/[label-numbers]' are matter。Those 'label-numbers' (in the previous case is ranging 0~18) are class-label-numbers when doing classification with LibSVM。You can set the lower-upper bounds with this toolkit (parameter -f 1 -t 18 will do)。
+Notice that only './data/train/[label-numbers]' & './data/test/[label-numbers]' are important。Those 'label-numbers' ( ranging 1~18 in the previous case) are class-labels when doing classification with LibSVM. You can set the lower&upper bounds with this toolkit (parameter -f 1 -t 18 will do)。
 
 ## Compiling & Run
 This toolkit only tested under ubuntu16.04.   
