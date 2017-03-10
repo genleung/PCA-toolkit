@@ -90,9 +90,15 @@ Notice that only './data/train/[label-numbers]' & './data/test/[label-numbers]' 
 
 ## Compiling & Run
 This toolkit only tested under ubuntu16.04.   
+
     $ make
+
 And then, you can run the toolkit now.
+    
     $ ./pca -f 1 -t 18 -e2 -v 0.99
+
 This would generate a [pca].xml file under './data/', a training [train].dat file under './data/training/' and a testing [test].dat file under './data/test/'. You can put the train.dat & test.data into LibSVM's 'tools' directory, and run with easy.py:
+
     ./easy.py train.dat test.dat
+
 easy.py will do a massive cross-validation and test procedure to find the best parameters for SVM classfication.
