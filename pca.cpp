@@ -309,11 +309,47 @@ bool loadSamples(std::vector<cv::Mat>& trainSamples, std::vector<cv::Mat>& testS
 }
 
 
+    /// 把cv::Mat的列表转为行矩阵形式(row-matrix), 类型目前为CV_32FC1
+    cv::Mat convertToRowMatrix(std::vector<cv::Mat>& src){
+        // Number of samples:
+        size_t n = src.size();
+        // Return empty matrix if no matrices given:
+        if(n == 0) return cv::Mat();
+        // dimensionality of (reshaped) samples
+        size_t d = src[0].total();
+
+        // Create resulting data matrix:
+        cv::Mat data(n, d, CV_32FC1);
+     
+
+        // Now copy data:
+        for(int i = 0; i < n; i++) {
+            //
+            if(src[i].empty()) {
+                std::cerr<<"Image("<<i<<") is invalid (empty image)!\n";
+                assert(0);
+            }
+            // Make sure data can be reshaped, throw a meaningful exception if not!
+            if(src[i].total() != d) {
+                std::cerr<<"Image("<<i<<") has wrong number of elements!\n";
+                assert(0);                
+            }
+            // Get a hold of the current row:
+            cv::Mat rmat = data.row(i);
+
+            // 把原始矩阵转为行矩阵
+            src[i].clone().reshape(1, 1).convertTo(rmat, rmat.type());
+    
+        }
+
+        return data;
+    }
+
 bool generatePCAModel(std::vector<cv::Mat>& samples, cv::PCA& pca){
     Parameters* param=&g_param;
 
     // 把全部样本集中到一个矩阵cv::Mat中，每一行一个样本
-    cv::Mat samplesRowMatrix=art::DataProcessing::convertToRowMatrix(samples);
+    cv::Mat samplesRowMatrix=convertToRowMatrix(samples);
     LOGL(NOTICE)<<"Running PCA dimension reducing algorithm on "<<samples.size()<<" samples, please wait ...";
     pca(samplesRowMatrix, cv::Mat(), cv::PCA::DATA_AS_ROW, param->reservedVariance);
     LOG()<<"Done.";
@@ -353,7 +389,7 @@ bool generateLIBSVMData(std::string filename,  std::vector<cv::Mat>& samples, st
     }
 
     // 对样本进行降维
-    cv::Mat rowMatrix=art::DataProcessing::convertToRowMatrix(samples);
+    cv::Mat rowMatrix=convertToRowMatrix(samples);
     cv::Mat compressed;
     pca.project(rowMatrix, compressed);
 
