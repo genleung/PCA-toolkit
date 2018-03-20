@@ -1,8 +1,8 @@
 #include "pca.h"
-#include "Log.h"
+#include "cf/Log.h"
 
 namespace fs = boost::filesystem;
-
+using namespace cf::utils;
 
 // The default variance to maintain
 const float DEFAULT_RESERVED_VARIANCE = 0.97;
@@ -74,9 +74,9 @@ bool parseCommandLine(int argc, char* argv[]){
 
     // 设置Log级别
     if(param->verbose){
-        art::setLogLevel(art::LogLevel::INFO);
+        setLogLevel(LogLevel::INFO);
     }else{
-        art::setLogLevel(art::LogLevel::NOTICE);
+        setLogLevel(LogLevel::NOTICE);
     }
 
 

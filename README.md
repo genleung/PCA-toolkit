@@ -28,7 +28,7 @@ After that, you can now proceed to install PCA-toolkit.
 
 If no errors emerges, you can run the toolkit now.
     
-    $ ./pca -f 1 -t 18 -e2 -v 0.99
+    $ ./pca -f 1 -t 18 -e 2 -V 0.99
 
 This would generate a [pca].xml file under './data/', a training [train].dat file under './data/training/' and a testing [test].dat file under './data/test/'. You can put the train.dat & test.data into LibSVM's 'tools' directory, and run with easy.py:
 
